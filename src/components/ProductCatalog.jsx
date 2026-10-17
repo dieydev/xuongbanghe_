@@ -1,16 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  Search, 
-  Filter, 
-  Eye, 
-  ShoppingBag, 
-  Ruler, 
-  Sparkles, 
-  Check, 
-  Clock, 
-  ShieldCheck,
-  PhoneCall
-} from 'lucide-react';
+import { Search, Eye, ShoppingBag } from 'lucide-react';
 import { getOptimizedImageUrl } from '../services/cloudinary';
 
 export default function ProductCatalog({ 
@@ -24,18 +13,13 @@ export default function ProductCatalog({
   const [searchTerm, setSearchTerm] = useState('');
   const [priceRange, setPriceRange] = useState('all');
 
-  // Lọc sản phẩm
   const filteredProducts = useMemo(() => {
     return products.filter((item) => {
-      // Lọc danh mục
       const matchCategory = selectedCategory === 'all' || item.category_id === selectedCategory;
-      
-      // Tìm kiếm từ khóa
       const matchSearch = searchTerm.trim() === '' || 
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.wood_type.toLowerCase().includes(searchTerm.toLowerCase());
 
-      // Lọc khoảng giá
       let matchPrice = true;
       if (priceRange === 'under5m') matchPrice = item.price < 5000000;
       else if (priceRange === '5to15m') matchPrice = item.price >= 5000000 && item.price <= 15000000;
@@ -47,27 +31,21 @@ export default function ProductCatalog({
   }, [products, selectedCategory, searchTerm, priceRange]);
 
   return (
-    <section id="products" className="section-padding" style={{ backgroundColor: 'var(--bg-page)' }}>
+    <section id="products" className="section-space" style={{ backgroundColor: 'var(--bg-ground)' }}>
       <div className="container">
         <div className="section-header">
-          <div className="section-tag">
-            <Sparkles size={15} />
-            <span>Sản Phẩm Tiêu Biểu</span>
-          </div>
-          <h2 className="section-title">Bộ Sưu Tập Bàn Ghế Gỗ Xưởng Tinh Hoa</h2>
+          <h2 className="section-title">Bộ Sưu Tập Bàn Ghế Gỗ Xưởng</h2>
           <p className="section-desc">
-            Tất cả sản phẩm đều được gia công trực tiếp tại xưởng mộc, nhận điều chỉnh kích thước và loại gỗ theo yêu cầu riêng của từng khách hàng.
+            Sản xuất trực tiếp tại xưởng Canh Nậu. Nhận điều chỉnh loại gỗ và kích thước thực tế theo mặt bằng.
           </p>
         </div>
 
-        {/* Filter & Search Bar */}
+        {/* Filter & Search Bar: Tone Separated */}
         <div style={{
-          background: '#ffffff',
-          padding: '18px 24px',
-          borderRadius: 'var(--radius-lg)',
-          boxShadow: 'var(--shadow-sm)',
-          border: '1px solid var(--border-color)',
-          marginBottom: '32px',
+          backgroundColor: 'var(--bg-step)',
+          padding: '16px 20px',
+          borderRadius: 'var(--radius-soft)',
+          marginBottom: '28px',
           display: 'flex',
           flexWrap: 'wrap',
           gap: '16px',
@@ -75,49 +53,41 @@ export default function ProductCatalog({
           justifyContent: 'space-between'
         }}>
           {/* Search Box */}
-          <div style={{
-            position: 'relative',
-            flex: '1 1 280px',
-            maxWidth: '420px'
-          }}>
+          <div style={{ position: 'relative', flex: '1 1 280px', maxWidth: '380px' }}>
             <Search 
-              size={18} 
-              style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-light)' }} 
+              size={17} 
+              style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} 
             />
             <input
               type="text"
-              placeholder="Tìm theo tên bàn ghế, loại gỗ sồi, gõ đỏ, me tây..."
+              placeholder="Tìm theo tên sản phẩm, loại gỗ..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               style={{
                 width: '100%',
-                padding: '11px 14px 11px 42px',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-color)',
-                fontSize: '0.9rem',
-                backgroundColor: 'var(--wood-50)',
-                color: 'var(--wood-900)'
+                padding: '10px 14px 10px 38px',
+                borderRadius: 'var(--radius-soft)',
+                border: 'none',
+                backgroundColor: 'var(--bg-surface)',
+                color: 'var(--text-ink)',
+                fontSize: '0.9rem'
               }}
             />
           </div>
 
           {/* Price Range Filter */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-muted)' }}>
-              Khoảng giá:
-            </span>
+            <span style={{ fontSize: 'var(--type-small)', fontWeight: '600' }}>Khoảng giá:</span>
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(e.target.value)}
               style={{
-                padding: '10px 14px',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--border-color)',
-                backgroundColor: '#ffffff',
-                fontSize: '0.88rem',
-                fontWeight: '600',
-                color: 'var(--wood-800)',
-                cursor: 'pointer'
+                padding: '9px 12px',
+                borderRadius: 'var(--radius-soft)',
+                border: 'none',
+                backgroundColor: 'var(--bg-surface)',
+                fontSize: 'var(--type-small)',
+                fontWeight: '600'
               }}
             >
               <option value="all">Tất cả mức giá</option>
@@ -129,14 +99,12 @@ export default function ProductCatalog({
           </div>
         </div>
 
-        {/* Categories Tab Strip */}
+        {/* Categories Pills */}
         <div style={{
           display: 'flex',
-          gap: '10px',
-          overflowX: 'auto',
-          paddingBottom: '16px',
-          marginBottom: '36px',
-          scrollbarWidth: 'none'
+          flexWrap: 'wrap',
+          gap: '8px',
+          marginBottom: '36px'
         }}>
           {categories.map((cat) => {
             const isActive = selectedCategory === cat.id;
@@ -146,15 +114,12 @@ export default function ProductCatalog({
                 onClick={() => setSelectedCategory(cat.id)}
                 style={{
                   padding: '10px 20px',
-                  borderRadius: 'var(--radius-full)',
+                  borderRadius: 'var(--radius-pill)',
                   fontWeight: '700',
-                  fontSize: '0.88rem',
+                  fontSize: 'var(--type-small)',
                   whiteSpace: 'nowrap',
-                  transition: 'all 0.2s',
-                  background: isActive ? 'var(--wood-900)' : '#ffffff',
-                  color: isActive ? '#ffffff' : 'var(--wood-700)',
-                  border: isActive ? '1px solid var(--wood-900)' : '1px solid var(--border-color)',
-                  boxShadow: isActive ? '0 4px 12px rgba(28, 25, 23, 0.15)' : 'none'
+                  backgroundColor: isActive ? '#181513' : 'var(--bg-step)',
+                  color: isActive ? '#ffffff' : 'var(--text-ink)'
                 }}
               >
                 {cat.name}
@@ -163,172 +128,82 @@ export default function ProductCatalog({
           })}
         </div>
 
-        {/* Product Grid */}
+        {/* Product Grid: Clean Tone-Separated Cards */}
         {filteredProducts.length === 0 ? (
-          <div style={{
-            textAlign: 'center',
-            padding: '60px 20px',
-            background: '#ffffff',
-            borderRadius: 'var(--radius-lg)',
-            border: '1px dashed var(--border-color)'
-          }}>
-            <h3 style={{ fontSize: '1.25rem', marginBottom: '8px' }}>Không tìm thấy mẫu bàn ghế phù hợp</h3>
-            <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginBottom: '18px' }}>
-              Hãy thử tìm với từ khóa khác hoặc gửi yêu cầu gia công riêng theo ý bạn.
-            </p>
-            <button 
-              onClick={() => { setSearchTerm(''); setPriceRange('all'); setSelectedCategory('all'); }}
-              className="btn btn-outline btn-sm"
-            >
-              Đặt lại bộ lọc
-            </button>
+          <div style={{ padding: '60px 20px', textAlign: 'center', backgroundColor: 'var(--bg-step)', borderRadius: 'var(--radius-soft)' }}>
+            <p style={{ fontSize: 'var(--type-body)', color: 'var(--text-muted)' }}>Không tìm thấy mẫu bàn ghế phù hợp.</p>
           </div>
         ) : (
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-            gap: '28px'
+            gap: '24px'
           }}>
             {filteredProducts.map((product) => {
               const mainImg = product.images?.[0] || 'https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=800&q=80';
               const optimizedImg = getOptimizedImageUrl(mainImg, 600);
 
               return (
-                <div key={product.id} className="card" style={{ display: 'flex', flexDirection: 'column' }}>
-                  {/* Image container */}
-                  <div style={{ position: 'relative', overflow: 'hidden', height: '240px', background: '#e7e5e4' }}>
+                <div key={product.id} data-reveal className="surface-card" style={{ display: 'flex', flexDirection: 'column' }}>
+                  {/* Image */}
+                  <div style={{ position: 'relative', height: '260px', backgroundColor: 'var(--bg-step)', overflow: 'hidden' }}>
                     <img
                       src={optimizedImg}
                       alt={product.name}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        transition: 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)'
-                      }}
-                      onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-                      onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                      style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                     />
-
-                    {/* Badge: Stock status */}
-                    <div style={{ position: 'absolute', top: '14px', left: '14px' }}>
-                      {product.stock_status === 'available' ? (
-                        <span className="badge badge-available">
-                          <Check size={12} strokeWidth={3} /> Có sẵn tại xưởng
-                        </span>
-                      ) : (
-                        <span className="badge badge-order">
-                          <Clock size={12} /> Đặt đóng {product.lead_time_days || 5} ngày
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Quick view button */}
-                    <button
-                      onClick={() => onSelectProduct(product)}
-                      style={{
-                        position: 'absolute',
-                        bottom: '12px',
-                        right: '12px',
-                        background: 'rgba(255, 255, 255, 0.92)',
-                        backdropFilter: 'blur(6px)',
-                        color: 'var(--wood-900)',
-                        padding: '6px 12px',
-                        borderRadius: 'var(--radius-sm)',
-                        fontSize: '0.78rem',
-                        fontWeight: '700',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '5px',
-                        boxShadow: 'var(--shadow-sm)'
-                      }}
-                    >
-                      <Eye size={14} /> Xem Chi Tiết
-                    </button>
                   </div>
 
                   {/* Body Content */}
-                  <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
-                    {/* Wood type tag */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
-                      <span className="badge badge-wood" style={{ fontSize: '0.72rem' }}>
-                        {product.wood_type}
-                      </span>
+                  <div style={{ padding: '22px', display: 'flex', flexDirection: 'column', flexGrow: 1 }}>
+                    <div style={{ marginBottom: '8px' }}>
+                      <span className="wood-tag">{product.wood_type}</span>
                     </div>
 
-                    {/* Name */}
                     <h3 
                       onClick={() => onSelectProduct(product)}
                       style={{
-                        fontSize: '1.05rem',
+                        fontSize: '1.15rem',
                         fontWeight: '700',
-                        marginBottom: '10px',
-                        color: 'var(--wood-900)',
+                        marginBottom: '8px',
                         cursor: 'pointer',
-                        lineHeight: 1.4,
-                        minHeight: '44px'
+                        lineHeight: 1.3
                       }}
                     >
                       {product.name}
                     </h3>
 
-                    {/* Dimensions */}
-                    <div style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '6px',
-                      color: 'var(--text-muted)',
-                      fontSize: '0.8rem',
-                      marginBottom: '14px'
-                    }}>
-                      <Ruler size={14} color="var(--amber-primary)" />
-                      <span>{product.dimensions}</span>
-                    </div>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginBottom: '18px' }}>
+                      Kích thước: {product.dimensions}
+                    </p>
 
-                    {/* Price and Cart Action */}
                     <div style={{
                       marginTop: 'auto',
                       paddingTop: '16px',
-                      borderTop: '1px solid var(--border-color)',
                       display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between'
+                      alignItems: 'baseline',
+                      justifyContent: 'space-between',
+                      borderTop: '2px solid var(--bg-step)'
                     }}>
                       <div>
-                        <div style={{
-                          fontSize: '1.25rem',
-                          fontWeight: '800',
-                          color: 'var(--amber-primary)',
-                          fontFamily: 'var(--font-heading)'
-                        }}>
+                        <div style={{ fontSize: '1.35rem', fontWeight: '800', color: 'var(--accent)', fontFamily: 'var(--font-heading)' }}>
                           {Number(product.price).toLocaleString('vi-VN')} đ
                         </div>
-                        {product.original_price && (
-                          <div style={{
-                            fontSize: '0.78rem',
-                            color: 'var(--text-light)',
-                            textDecoration: 'line-through'
-                          }}>
-                            {Number(product.original_price).toLocaleString('vi-VN')} đ
-                          </div>
-                        )}
                       </div>
 
                       <div style={{ display: 'flex', gap: '8px' }}>
                         <button
                           onClick={() => onAddToCart(product)}
-                          className="btn btn-outline btn-sm"
-                          title="Thêm vào danh sách chọn"
-                          style={{ padding: '8px 12px' }}
+                          className="btn btn-subtle btn-sm"
+                          title="Thêm vào đơn"
                         >
-                          <ShoppingBag size={16} />
+                          <ShoppingBag size={15} />
                         </button>
                         <button
                           onClick={() => onSelectProduct(product)}
-                          className="btn btn-primary btn-sm"
-                          style={{ padding: '8px 14px' }}
+                          className="btn btn-dark btn-sm"
                         >
-                          Đặt Làm
+                          Xem Mẫu
                         </button>
                       </div>
                     </div>

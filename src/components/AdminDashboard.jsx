@@ -492,11 +492,11 @@ export default function AdminDashboard({ onBackToStore }) {
                                 : '#ffffff'
                           }}
                         >
-                          <option value="pending">⏳ Chờ duyệt & Khảo sát đo đạc</option>
-                          <option value="confirmed">📋 Đã chốt hợp đồng & Cọc</option>
-                          <option value="in_production">🪵 Đang xẻ phôi gỗ & Gia công</option>
-                          <option value="delivering">🚚 Đang sơn PU & Giao hàng</option>
-                          <option value="completed">✅ Đã hoàn tất & Nghiệm thu</option>
+                          <option value="pending">Chờ duyệt & Khảo sát đo đạc</option>
+                          <option value="confirmed">Đã chốt hợp đồng & Cọc</option>
+                          <option value="in_production">Đang xẻ phôi gỗ & Gia công</option>
+                          <option value="delivering">Đang sơn PU & Giao hàng</option>
+                          <option value="completed">Đã hoàn tất & Nghiệm thu</option>
                         </select>
                       </div>
                     </div>
@@ -534,7 +534,7 @@ export default function AdminDashboard({ onBackToStore }) {
                 <div>
                   <h3 style={{ fontSize: '1.15rem', color: 'var(--wood-900)' }}>Supabase PostgreSQL</h3>
                   <span style={{ fontSize: '0.78rem', color: systemStatus.supabaseConfigured ? '#059669' : '#d97706', fontWeight: '700' }}>
-                    {systemStatus.supabaseConfigured ? '✓ Đang Kết Nối Trực Tiếp' : '⚠ Chạy Chế Độ Mock Data (Chưa Có Key)'}
+                    {systemStatus.supabaseConfigured ? 'Đang Kết Nối Trực Tiếp' : 'Chế Độ Mock Data (Chưa Có Key)'}
                   </span>
                 </div>
               </div>
@@ -589,7 +589,7 @@ export default function AdminDashboard({ onBackToStore }) {
                 <div>
                   <h3 style={{ fontSize: '1.15rem', color: 'var(--wood-900)' }}>Cloudinary Media</h3>
                   <span style={{ fontSize: '0.78rem', color: systemStatus.cloudinaryConfigured ? '#2563eb' : '#d97706', fontWeight: '700' }}>
-                    {systemStatus.cloudinaryConfigured ? `✓ Cloud: ${systemStatus.cloudinaryCloud}` : '⚠ Chế Độ Ảnh Cục Bộ (Chưa Có Key)'}
+                    {systemStatus.cloudinaryConfigured ? `Cloud: ${systemStatus.cloudinaryCloud}` : 'Chế Độ Ảnh Cục Bộ (Chưa Có Key)'}
                   </span>
                 </div>
               </div>

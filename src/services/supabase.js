@@ -131,7 +131,7 @@ const INITIAL_PRODUCTS = [
     description: 'Dòng ghế kinh điển thanh thoát vượt thời gian. Lưng tựa và mê ngồi đan mây mắt cáo thoáng mát, đàn hồi êm ái cho trải nghiệm ngồi thư giãn.',
     features: ['Kỹ thuật uốn cong gỗ hơi nước nguyên thanh', 'Mây đan thủ công tỉ mỉ thoáng mát', 'Phù hợp quán cafe, phòng ăn, homestay', 'Khung chắc chắn chịu lực tốt'],
     images: [
-      'https://images.unsplash.com/photo-1580481077195-c3a9927b74b7?auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=800&q=80'
     ],
     is_featured: true,
@@ -194,20 +194,48 @@ const INITIAL_CUSTOM_ORDERS = [
     height_cm: 75,
     thickness_cm: 3,
     estimated_price: 32000000,
-    design_image_url: 'https://images.unsplash.com/photo-1580481077195-c3a9927b74b7?auto=format&fit=crop&w=800&q=80',
+    design_image_url: 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=800&q=80',
     note: 'Cần hoàn thành trước ngày 28 để khai trương quán.',
     status: 'confirmed',
     created_at: new Date(Date.now() - 86400000 * 1).toISOString()
   }
 ];
 
-// Helper khởi tạo LocalStorage
+// Helper khởi tạo LocalStorage có kiểm tra và tự dọn cache hỏng
+const sanitizeUrl = (url) => {
+  if (typeof url !== 'string' || url.includes('1580481077195')) {
+    return 'https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=1200&q=80';
+  }
+  return url;
+};
+
+const sanitizeProduct = (p) => {
+  const images = Array.isArray(p.images) ? p.images.map(sanitizeUrl) : [sanitizeUrl(p.image_url)];
+  return {
+    ...p,
+    images,
+    image_url: images[0]
+  };
+};
+
 function getLocalStore(key, defaultValue) {
   try {
+    // Clear out old keys if present
+    localStorage.removeItem('xuong_products');
+    localStorage.removeItem('xuong_products_v1');
+    localStorage.removeItem('xuong_products_v2');
+    
     const data = localStorage.getItem(key);
-    if (data) return JSON.parse(data);
-    localStorage.setItem(key, JSON.stringify(defaultValue));
-    return defaultValue;
+    if (data) {
+      const parsed = JSON.parse(data);
+      if (Array.isArray(parsed)) {
+        return parsed.map(sanitizeProduct);
+      }
+      return parsed;
+    }
+    const sanitized = Array.isArray(defaultValue) ? defaultValue.map(sanitizeProduct) : defaultValue;
+    localStorage.setItem(key, JSON.stringify(sanitized));
+    return sanitized;
   } catch {
     return defaultValue;
   }
@@ -237,14 +265,14 @@ export async function getProducts(categoryId = 'all') {
       }
       const { data, error } = await query;
       if (error) throw error;
-      if (data && data.length > 0) return data;
+      if (data && data.length > 0) return data.map(sanitizeProduct);
     } catch (err) {
       console.warn('Supabase query failed, using local store:', err);
     }
   }
 
   // Fallback Local Storage
-  const products = getLocalStore('xuong_products', INITIAL_PRODUCTS);
+  const products = getLocalStore('xuong_products_v3', INITIAL_PRODUCTS);
   if (categoryId && categoryId !== 'all') {
     return products.filter((p) => p.category_id === categoryId);
   }

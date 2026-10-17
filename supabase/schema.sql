@@ -206,7 +206,7 @@ INSERT INTO products (
     'Phủ bóng mờ bảo vệ mây tự nhiên',
     'Dòng ghế kinh điển vượt thời gian. Lưng tựa và mê ngồi đan mây mắt cáo thoáng mát, đàn hồi tốt mang lại cảm giác ngồi cực kỳ thư thái.',
     '["Kỹ thuật uốn cong gỗ hơi nước nguyên khối", "Mây đan thủ công tỉ mỉ", "Phù hợp quán cafe, trà sữa, homestay, ban công", "Chống ẩm mốc tốt"]'::jsonb,
-    '["https://images.unsplash.com/photo-1580481077195-c3a9927b74b7?auto=format&fit=crop&w=1200&q=80", "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=800&q=80"]'::jsonb,
+    '["https://images.unsplash.com/photo-1592078615290-033ee584e267?auto=format&fit=crop&w=1200&q=80", "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=800&q=80"]'::jsonb,
     true,
     true,
     'available',

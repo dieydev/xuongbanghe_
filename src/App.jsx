@@ -43,6 +43,33 @@ export default function App() {
     initData();
   }, []);
 
+  // Taste-Skill Motion Observer: Choreographed reveal for [data-reveal]
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-in');
+            e.target.style.opacity = '1';
+            e.target.style.transform = 'translateY(0px)';
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -5% 0px', threshold: 0.05 }
+    );
+
+    const elements = document.querySelectorAll('[data-reveal]');
+    elements.forEach((el) => {
+      el.style.opacity = '0.01';
+      el.style.transform = 'translateY(22px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      io.observe(el);
+    });
+
+    return () => io.disconnect();
+  }, [products, categories, isAdmin]);
+
   const scrollToSection = (id) => {
     if (isAdmin) {
       setIsAdmin(false);
