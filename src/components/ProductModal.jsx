@@ -11,7 +11,7 @@ export default function ProductModal({ product, onClose, onAddToCart, onCustomiz
     : ['https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=80'];
 
   return (
-    <div style={{
+    <div className="modal-overlay" style={{
       position: 'fixed',
       inset: 0,
       zIndex: 1000,
@@ -22,7 +22,7 @@ export default function ProductModal({ product, onClose, onAddToCart, onCustomiz
       padding: '24px',
       overflowY: 'auto'
     }}>
-      <div style={{
+      <div className="modal-content" style={{
         backgroundColor: 'var(--bg-surface)',
         borderRadius: 'var(--radius-soft)',
         maxWidth: '860px',

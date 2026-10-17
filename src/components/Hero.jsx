@@ -11,9 +11,30 @@ export default function Hero({ onExploreClick, onEstimateClick }) {
           gap: '52px',
           alignItems: 'center'
         }}>
-          {/* Left Column: Bold two-line headline (Max 2 lines at all widths) */}
+          {/* Left Column: Bold headline */}
           <div>
-            <h1 data-rise style={{ '--i': 0, marginBottom: '24px' }}>
+            <div data-rise className="float-badge" style={{
+              '--i': 0,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              padding: '6px 14px',
+              borderRadius: '999px',
+              backgroundColor: 'var(--bg-step)',
+              border: '1px solid var(--border-subtle)',
+              marginBottom: '20px'
+            }}>
+              <img
+                src="/logo-round.png"
+                alt="DIEY WOOD"
+                style={{ width: '22px', height: '22px', borderRadius: '50%', objectFit: 'contain' }}
+              />
+              <span style={{ fontSize: '0.82rem', fontWeight: '700', color: 'var(--text-ink)', letterSpacing: '0.03em' }}>
+                DIEY WOOD — Xưởng Mộc Canh Nậu 15 Năm Nghề
+              </span>
+            </div>
+
+            <h1 data-rise style={{ '--i': 1, marginBottom: '24px' }}>
               Đóng Bàn Ghế Theo Kích Thước
             </h1>
 
@@ -66,7 +87,7 @@ export default function Hero({ onExploreClick, onEstimateClick }) {
 
           {/* Right Column: Dominant Focal-point Image */}
           <div data-rise style={{ '--i': 2 }}>
-            <div style={{
+            <div className="hero-image-frame" style={{
               backgroundColor: 'var(--bg-step)',
               borderRadius: 'var(--radius-soft)',
               overflow: 'hidden',

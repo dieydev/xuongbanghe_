@@ -5,19 +5,50 @@ export default function Footer({ onNavClick, onOpenAdmin }) {
   return (
     <footer style={{ backgroundColor: 'var(--bg-dark)', color: 'var(--text-light)', paddingTop: '80px', paddingBottom: '40px' }}>
       <div className="container">
-        {/* Large Architectural Wordmark Construction */}
+        {/* Large Architectural Wordmark Construction with Brand Badge */}
         <div style={{
-          fontSize: 'clamp(1.75rem, 6.5vw, 6rem)',
-          fontWeight: '800',
-          fontFamily: 'var(--font-heading)',
-          color: '#ffffff',
-          lineHeight: 1,
-          letterSpacing: '-0.03em',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '24px',
           marginBottom: '48px',
-          textTransform: 'uppercase',
-          whiteSpace: 'nowrap'
+          flexWrap: 'wrap'
         }}>
-          Tinh Hoa Wood
+          <img
+            src="/logo-round.png"
+            alt="DIEY WOOD"
+            style={{
+              width: '80px',
+              height: '80px',
+              borderRadius: '50%',
+              objectFit: 'contain',
+              boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
+              border: '2px solid rgba(245, 158, 11, 0.3)',
+              backgroundColor: '#1c1917'
+            }}
+          />
+          <div>
+            <div style={{
+              fontSize: 'clamp(2.2rem, 6.5vw, 4.5rem)',
+              fontWeight: '800',
+              fontFamily: 'var(--font-heading)',
+              color: '#ffffff',
+              lineHeight: 1,
+              letterSpacing: '-0.02em',
+              textTransform: 'uppercase'
+            }}>
+              DIEY WOOD
+            </div>
+            <div style={{
+              color: 'var(--accent)',
+              fontSize: '0.85rem',
+              fontWeight: '700',
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              marginTop: '6px'
+            }}>
+              Xưởng Sản Xuất Bàn Ghế Gỗ Tự Nhiên Canh Nậu
+            </div>
+          </div>
         </div>
 
         <div style={{
@@ -100,7 +131,7 @@ export default function Footer({ onNavClick, onOpenAdmin }) {
           color: '#78716c'
         }}>
           <div>
-            © 2026 Xưởng Bàn Ghế Tinh Hoa Wood. Tất cả các quyền được bảo lưu.
+            © 2026 Xưởng Bàn Ghế DIEY WOOD. Tất cả các quyền được bảo lưu.
           </div>
           <div>
             <a 

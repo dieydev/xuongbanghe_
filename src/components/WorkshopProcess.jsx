@@ -51,6 +51,12 @@ export default function WorkshopProcess({ onConsultClick }) {
           alignItems: 'center'
         }}>
           <div style={{ padding: '36px' }}>
+            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+              <img src="/logo-round.png" alt="DIEY WOOD" style={{ width: '22px', height: '22px', borderRadius: '50%' }} />
+              <span style={{ fontSize: '0.78rem', fontWeight: '700', color: 'var(--accent)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                Dấu Ấn Nghề Mộc DIEY WOOD
+              </span>
+            </div>
             <h3 style={{ fontSize: 'var(--type-lead)', fontWeight: '700', marginBottom: '12px' }}>
               Bàn Tay Người Thợ Mộc Canh Nậu
             </h3>

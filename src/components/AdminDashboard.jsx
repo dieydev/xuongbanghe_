@@ -183,9 +183,16 @@ export default function AdminDashboard({ onBackToStore }) {
                 {systemStatus.supabaseConfigured ? '● Supabase Đã Kết Nối' : '● Chế độ Dữ Liệu Cục Bộ (Mock)'}
               </span>
             </div>
-            <h1 style={{ fontSize: '1.85rem', color: 'var(--wood-900)', marginTop: '4px' }}>
-              Quản Trị Xưởng Bàn Ghế Tinh Hoa Wood
-            </h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '6px' }}>
+              <img
+                src="/logo-round.png"
+                alt="DIEY WOOD"
+                style={{ width: '40px', height: '40px', borderRadius: '50%', objectFit: 'contain' }}
+              />
+              <h1 style={{ fontSize: '1.85rem', color: 'var(--wood-900)', margin: 0 }}>
+                Quản Trị Xưởng Bàn Ghế DIEY WOOD
+              </h1>
+            </div>
           </div>
 
           <div style={{ display: 'flex', gap: '10px' }}>

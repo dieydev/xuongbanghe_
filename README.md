@@ -1,4 +1,4 @@
-# 🪑 XƯỞNG BÀN GHẾ GỖ TINH HOA WOOD
+# 🪑 XƯỞNG BÀN GHẾ GỖ DIEY WOOD
 > **Nền tảng Web Xưởng Mộc & Gia Công Bàn Ghế Theo Kích Thước Riêng**  
 > Frontend: **React + Vite** | Backend: **React Admin CMS** | Database: **Supabase (PostgreSQL)** | Lưu trữ ảnh: **Cloudinary**  
 > GitHub Repository: [https://github.com/dieydev/xuongbanghe_.git](https://github.com/dieydev/xuongbanghe_.git)

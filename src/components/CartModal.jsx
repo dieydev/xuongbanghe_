@@ -39,7 +39,7 @@ export default function CartModal({ isOpen, onClose, cartItems, onUpdateQuantity
   };
 
   return (
-    <div style={{
+    <div className="modal-overlay" style={{
       position: 'fixed',
       inset: 0,
       zIndex: 1000,
@@ -49,7 +49,7 @@ export default function CartModal({ isOpen, onClose, cartItems, onUpdateQuantity
       justifyContent: 'center',
       padding: '24px'
     }}>
-      <div style={{
+      <div className="modal-content" style={{
         backgroundColor: 'var(--bg-surface)',
         borderRadius: 'var(--radius-soft)',
         maxWidth: '620px',
